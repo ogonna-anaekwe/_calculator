@@ -1,7 +1,7 @@
-import argparse
 from _evaluator import Evaluator
 from _parser import Parser
 from _scanner import Scanner
+import argparse
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()

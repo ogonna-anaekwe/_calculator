@@ -1,4 +1,4 @@
-## _calculator
+## Overview
 This is a calculator that evaluates basic arithmetic operations: addition `+`, subtraction `-`, division `\`, multiplication `\*`, and power `^`.
 
 ## How it works

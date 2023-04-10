@@ -20,20 +20,23 @@ class Evaluator(Visitor):
 
         self.check_operands(left, right)
 
+        left = float(left)
+        right = float(right)
+
         if Binary.operator == "+":
-            return round(float(left) + float(right), Evaluator.precision)
+            return round(left + right, Evaluator.precision)
 
         if Binary.operator == "-":
-            return round(float(left) - float(right), Evaluator.precision)
+            return round(left - right, Evaluator.precision)
 
         if Binary.operator == "/":
-            return round(float(left) / float(right), Evaluator.precision)
+            return round(left / right, Evaluator.precision)
 
         if Binary.operator == "*":
-            return round(float(left) * float(right), Evaluator.precision)
+            return round(left * right, Evaluator.precision)
 
         if Binary.operator == "^":
-            return round(pow(float(left), float(right)), Evaluator.precision)
+            return round(pow(left, right), Evaluator.precision)
 
     def visit_literal_expr(self, Literal):
         """Visitor implementation for literal expressions."""

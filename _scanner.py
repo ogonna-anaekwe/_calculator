@@ -93,9 +93,7 @@ class Scanner:
         token_len = len(self.tokens)
         for idx in range(token_len):
             if idx % 2 == 0:  # Even indexed tokens must be numbers (i.e. operands).
-                print(self.tokens[idx])
                 is_digit = self.is_digit_or_dot(self.tokens[idx].lexeme)
-                print(is_digit)
                 if not is_digit:
                     raise ValueError("Number expected for token number " + str(idx))
 

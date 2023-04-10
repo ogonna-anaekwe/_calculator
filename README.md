@@ -3,7 +3,7 @@ This is a calculator that evaluates basic arithmetic operations: addition `+`, s
 
 ## How it works
 A user passes a string representation of an arithmetic operation (e.g. `"10 / 5 + 6 * 88"`). We take that string and do the following:
-1. Scan every character in that string to generate a list tokens. 
+1. Scan every character to generate a list tokens. 
 2. Parse the list (from step 1) to generate an [Abstract Syntax Tree (AST)](https://en.wikipedia.org/wiki/Abstract_syntax_tree) for the user-inputted arithmetic operation.
 3. Evaluate the AST. 
 

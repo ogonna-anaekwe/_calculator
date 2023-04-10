@@ -15,7 +15,7 @@ class Binary:
 
     def __str__(self):
         """Overrides default str representation."""
-        binary_ast = binary_ast = "".join(
+        binary_ast = "".join(
             [
                 "(",
                 str(self.operator),

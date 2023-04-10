@@ -18,25 +18,22 @@ class Evaluator(Visitor):
         left = self.evaluate(Binary.left)
         right = self.evaluate(Binary.right)
 
+        self.check_operands(left, right)
+
+        if Binary.operator == "+":
+            return round(float(left) + float(right), Evaluator.precision)
+
+        if Binary.operator == "-":
+            return round(float(left) - float(right), Evaluator.precision)
+
+        if Binary.operator == "/":
+            return round(float(left) / float(right), Evaluator.precision)
+
         if Binary.operator == "*":
-            if self.check_operands(left, right):
-                return round(float(left) * float(right), Evaluator.precision)
+            return round(float(left) * float(right), Evaluator.precision)
 
-        elif Binary.operator == "+":
-            if self.check_operands(left, right):
-                return round(float(left) + float(right), Evaluator.precision)
-
-        elif Binary.operator == "-":
-            if self.check_operands(left, right):
-                return round(float(left) - float(right), Evaluator.precision)
-
-        elif Binary.operator == "/":
-            if self.check_operands(left, right):
-                return round(float(left) / float(right), Evaluator.precision)
-
-        elif Binary.operator == "^":
-            if self.check_operands(left, right):
-                return round(pow(float(left), float(right)), Evaluator.precision)
+        if Binary.operator == "^":
+            return round(pow(float(left), float(right)), Evaluator.precision)
 
     def visit_literal_expr(self, Literal):
         """Visitor implementation for literal expressions."""
@@ -44,8 +41,5 @@ class Evaluator(Visitor):
 
     def check_operands(self, left, right):
         """Validate that both the left and right operands are numbers."""
-        both_nums = float(left) and float(right)
-        if not both_nums:
+        if not (isinstance(float(left), float) and isinstance(float(right), float)):
             raise TypeError("Left and right operands must be numbers.")
-
-        return both_nums

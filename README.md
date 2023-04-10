@@ -14,7 +14,7 @@ binary -> expression operator expression;
 operator -> "+" | "-" | "/" | "*";
 ```
 
-To determine the order in which operations will be evaluated, we expand the grammar to:
+To determine precedence (i.e the order in which operations will be evaluated), we expand the grammar to:
 ```sh
 expression -> term;
 term -> factor(("+" | "-") factor)*;

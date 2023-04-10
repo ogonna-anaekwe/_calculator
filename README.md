@@ -1,5 +1,5 @@
 ## Overview
-This is a calculator that evaluates basic arithmetic operations: addition `+`, subtraction `-`, division `\`, multiplication `\*`, and power `^`.
+This is a calculator that evaluates basic arithmetic operations: addition `+`, subtraction `-`, division `/`, multiplication `\*`, and power `^`.
 
 ## How it works
 A user passes a string representation of an arithmetic operation (e.g. `"10 / 5 + 6 * 88"`). We take that string and do the following:

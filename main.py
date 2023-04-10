@@ -7,7 +7,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument(
         "expr",
-        help='expression that you\'d like to evaluate. e.g: "10 * 50 ^ 2 - 40". it must be wrapped in double quotes.',
+        help='expression that you want to evaluate. e.g: "10 * 50 ^ 2 - 40". it must be wrapped in double quotes.',
     )
     string = parser.parse_args().expr
     scanner = Scanner(string)

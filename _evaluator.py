@@ -18,7 +18,7 @@ class Evaluator(Visitor):
         left = self.evaluate(Binary.left)
         right = self.evaluate(Binary.right)
 
-        self.check_operands(left, right)
+        Evaluator.check_operands(left, right)
 
         left = float(left)
         right = float(right)
@@ -42,7 +42,8 @@ class Evaluator(Visitor):
         """Visitor implementation for literal expressions."""
         return Literal.literal
 
-    def check_operands(self, left, right):
+    @staticmethod
+    def check_operands(left, right):
         """Validate that both the left and right operands are numbers."""
         if not (isinstance(float(left), float) and isinstance(float(right), float)):
             raise TypeError("Left and right operands must be numbers.")

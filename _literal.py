@@ -7,9 +7,9 @@ class Literal:
     def __init__(self, literal):
         self.literal = literal
 
-    def accept(self, visitor):
+    def accept(self, Visitor):
         """Interface to the visitor implementation for Literal Expressions."""
-        return visitor.visit_literal_expr(self)
+        return Visitor.visit_literal_expr(self)
 
     def __str__(self):
         """Overrides default str representation."""

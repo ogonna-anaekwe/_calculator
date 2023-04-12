@@ -9,9 +9,9 @@ class Binary:
         self.operator = operator
         self.right = right
 
-    def accept(self, visitor):
+    def accept(self, Visitor):
         """Interface to the visitor implementation for Binary Expressions."""
-        return visitor.visit_binary_expr(self)
+        return Visitor.visit_binary_expr(self)
 
     def __str__(self):
         """Overrides default str representation."""

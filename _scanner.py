@@ -2,7 +2,7 @@ from _token import Token
 from _token_type import TokenType
 
 
-# BUG: ending w/ an int btw 1 - 9 makes the scanner drop the int.
+# BUG: for expressions ending w/ an int btw 0 - 9, the scanner drops the int, resulting in an invalid sequence of tokens. add_last_digit() fixes this in a TERRIBLE way!
 class Scanner:
     """Given a sequence of lexemes, creates a list of tokens."""
 
@@ -38,6 +38,7 @@ class Scanner:
             self.advance()
 
         # self.validate_tokens()
+        self.add_last_digit()
         return self.tokens
 
     def add_token(self, token_type, lexeme):
@@ -71,6 +72,10 @@ class Scanner:
                 self.get_digit()  # Recursively walk through the string of chars to get multi-digit numbers.
 
         return "".join(self.digits)
+
+    def add_last_digit(self):
+        if self.tokens[len(self.tokens) - 1].type != TokenType.NUMBER.name:
+            self.add_token(TokenType.NUMBER.name, self.string[len(self.string) - 1])
 
     def next(self):
         """Returns next character. Returns '-1' if we've reach the End of String."""

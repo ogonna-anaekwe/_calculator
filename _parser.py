@@ -84,3 +84,6 @@ class Parser:
     def advance(self):
         """Move to next token."""
         self.current += 1
+
+    def check_syntax(self):
+        pass

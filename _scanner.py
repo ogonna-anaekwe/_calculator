@@ -74,7 +74,7 @@ class Scanner:
         return "".join(self.digits)
 
     def add_last_digit(self):
-        """For strings ending with ints between 0-9, add that to the end of the tokens."""
+        """For strings ending with an int between 0-9, add that to the end of the tokens."""
         if self.tokens[len(self.tokens) - 1].type != TokenType.NUMBER.name:
             self.add_token(TokenType.NUMBER.name, self.string[len(self.string) - 1])
 

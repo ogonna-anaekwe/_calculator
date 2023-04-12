@@ -4,9 +4,9 @@ from abc import abstractmethod
 
 class Visitor(ABC):
     @abstractmethod
-    def visit_binary_expr(self):
+    def visit_binary_expr(self, Binary):
         raise NotImplementedError
 
     @abstractmethod
-    def visit_literal_expr(self):
+    def visit_literal_expr(self, Literal):
         raise NotImplementedError

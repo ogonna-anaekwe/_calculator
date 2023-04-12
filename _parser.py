@@ -57,6 +57,7 @@ class Parser:
         return Literal(self.previous().lexeme)
 
     def match(self, token_types):
+        """Checks if token matches any of the arithmetic operators: +, -, /, *, ^."""
         for token_type in token_types:
             token_idx = self.current
             if self.at_end():

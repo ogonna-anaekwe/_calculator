@@ -15,7 +15,7 @@ We use [a BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) for our g
 expression -> literal | binary;
 literal -> NUMBER;
 binary -> expression operator expression;
-operator -> "+" | "-" | "/" | "*";
+operator -> "+" | "-" | "/" | "*" | "^";
 ```
 
 To determine precedence (i.e the order in which operations will be evaluated), we expand the grammar to:

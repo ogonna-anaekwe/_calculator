@@ -10,9 +10,7 @@ if __name__ == "__main__":
         help='expression that you want to evaluate. e.g: "10 * 50 ^ 2 - 40". it must be wrapped in double quotes.',
     )
     string = parser.parse_args().expr
-    scanner = Scanner(string)
-    tokens = scanner.scan()
-    parser = Parser(tokens)
-    expression_ast = parser.parse()
+    tokens = Scanner(string).scan()
+    expression_ast = Parser(tokens).parse()
     value = Evaluator().evaluate(expression_ast)
     print(value)

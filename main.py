@@ -13,6 +13,6 @@ if __name__ == "__main__":
     scanner = Scanner(string)
     tokens = scanner.scan()
     parser = Parser(tokens)
-    expression = parser.parse()
-    value = Evaluator().evaluate(expression)
+    expression_ast = parser.parse()
+    value = Evaluator().evaluate(expression_ast)
     print(value)

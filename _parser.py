@@ -43,7 +43,13 @@ class Parser:
         while self.match([TokenType.POWER.name]):
             operator = self.previous().lexeme
             right = self.primary()
-            expr = Binary(expr, operator, right)
+
+            if isinstance(expr, Binary):
+                """Right associativity for power expressions: 2 ^ 2 ^ 3 => 2 ^ (2 ^ 3)"""
+                new_right = Binary(expr.right, operator, right)
+                expr = Binary(expr.left, operator, new_right)
+            else:
+                expr = Binary(expr, operator, right)
 
         return expr
 

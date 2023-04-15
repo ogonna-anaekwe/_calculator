@@ -27,6 +27,8 @@ power -> primary("^"primary)*;
 primary -> NUMBER
 ```
 
+All rules are [left-associative](https://en.wikipedia.org/wiki/Operator_associativity) but the `power` rule which is right-associative.
+
 ## Usage
 ```sh
 python main.py "<arithmetic_operation>" # python main.py "10 / 5 + 6 * 88"

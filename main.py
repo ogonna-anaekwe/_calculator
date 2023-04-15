@@ -15,4 +15,5 @@ if __name__ == "__main__":
     # scanner.print_tokens()
     parser = Parser(tokens)
     expression = parser.parse()
+    print(expression)
     print(Evaluator().evaluate(expression))

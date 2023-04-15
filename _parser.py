@@ -46,7 +46,7 @@ class Parser:
 
             if isinstance(expr, Binary):
                 """Right associativity for power expressions: 2 ^ 2 ^ 3 => 2 ^ (2 ^ 3)"""
-                new_right = Binary(expr.right, operator, right)
+                new_right = Binary(expr.right, expr.operator, right)
                 expr = Binary(expr.left, operator, new_right)
             else:
                 expr = Binary(expr, operator, right)

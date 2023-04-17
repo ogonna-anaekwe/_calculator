@@ -10,3 +10,7 @@ class Visitor(ABC):
     @abstractmethod
     def visit_literal_expr(self, Literal):
         raise NotImplementedError
+
+    @abstractmethod
+    def visit_group_expr(self, Group):
+        raise NotImplementedError

@@ -12,6 +12,8 @@ class Scanner:
         "/": TokenType.SLASH,
         "*": TokenType.STAR,
         "^": TokenType.POWER,
+        "(": TokenType.LEFT_PAREN,
+        ")": TokenType.RIGHT_PAREN,
     }
 
     def __init__(self, string):

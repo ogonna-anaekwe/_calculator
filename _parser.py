@@ -1,4 +1,5 @@
 from _binary import Binary
+from _group import Group
 from _literal import Literal
 from _token_type import TokenType
 
@@ -12,6 +13,9 @@ class Parser:
         self.current = 0  # Index of token being parsed.
 
     def parse(self):
+        return self.expression()
+
+    def expression(self):
         return self.term()
 
     def term(self):
@@ -55,12 +59,15 @@ class Parser:
 
     def primary(self):
         """Highest precedence represented by a literal which in this case is TokenType.NUMBER.
-        BNF: primary := NUMBER"""
-        if self.at_end():
+        BNF: primary := NUMBER | "(" expression ")" """
+        if self.match([TokenType.NUMBER.name]):
             return Literal(self.previous().lexeme)
 
-        self.advance()  # Remove this and see what happens.
-        return Literal(self.previous().lexeme)
+        if self.match([TokenType.LEFT_PAREN.name]):
+            expr = self.expression()
+            self.peek_next(")", "Missing closing ')' in group expression.")
+            self.advance()
+            return Group(expr)
 
     def match(self, token_types):
         """Checks if token matches any of the arithmetic operators: +, -, /, *, ^."""
@@ -90,6 +97,18 @@ class Parser:
     def advance(self):
         """Move to next token."""
         self.current += 1
+
+    def peek_next(self, token, err_msg):
+        """Checks that the next token matches what's expected.
+        This is used for matching the closing parenthesis for Group expressions."""
+        token_idx = self.current
+
+        if self.at_end():
+            token_idx -= 1
+
+        correct_token = self.tokens[token_idx].lexeme == token
+        if not correct_token:
+            raise ValueError(err_msg)
 
     def check_syntax(self):
         pass

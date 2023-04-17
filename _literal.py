@@ -1,6 +1,6 @@
 class Literal:
     """Literal node in the AST.
-    A literal is just a expression waiting to returned as a value."""
+    A Literal is just a expression waiting to returned as a value."""
 
     lisp_style = True
 

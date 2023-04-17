@@ -42,6 +42,10 @@ class Evaluator(Visitor):
         """Visitor implementation for literal expressions."""
         return Literal.literal
 
+    def visit_group_expr(self, Group):
+        """Visitor implementation for group/parenthesized expressions."""
+        return self.evaluate(Group.expression)
+
     @staticmethod
     def check_operands(left, right):
         """Validate that both the left and right operands are numbers."""

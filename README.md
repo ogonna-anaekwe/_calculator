@@ -12,9 +12,10 @@ All 3 steps are implemented by helper classes: `Scanner`, `Parser`, and `Evaluat
 ## Grammar
 We use [a BNF](https://en.wikipedia.org/wiki/Backus%E2%80%93Naur_form) for our grammar. In the grammar rules below, quoted and capitalized objects (e.g. `"+"`, `NUMBER`) are terminals, the rest are non-terminals.
 ```sh
-expression -> literal | binary;
+expression -> literal | binary | group;
 literal -> NUMBER;
 binary -> expression operator expression;
+group -> "(" expression ")";
 operator -> "+" | "-" | "/" | "*" | "^";
 ```
 
@@ -24,7 +25,7 @@ expression -> term;
 term -> factor(("+" | "-") factor)*;
 factor -> power(("/" | "*") power)*;
 power -> primary("^"primary)*;
-primary -> NUMBER
+primary -> NUMBER | "(" expression ")";
 ```
 
 All rules are [left-associative](https://en.wikipedia.org/wiki/Operator_associativity) but the `power` rule which is right-associative.

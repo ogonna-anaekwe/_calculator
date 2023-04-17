@@ -65,7 +65,9 @@ class Parser:
 
         if self.match([TokenType.LEFT_PAREN.name]):
             expr = self.expression()
-            self.check_token(")", "Missing closing ')' in group expression.")
+            self.check_token(
+                TokenType.RIGHT_PAREN.name, "Missing closing ')' in group expression."
+            )
             return Group(expr)
 
     def match(self, token_types):
@@ -105,7 +107,7 @@ class Parser:
         if self.at_end():
             token_idx -= 1
 
-        correct_token = self.tokens[token_idx].lexeme == token
+        correct_token = self.tokens[token_idx].type == token
         if not correct_token:
             raise ValueError(err_msg)
 

@@ -65,8 +65,7 @@ class Parser:
 
         if self.match([TokenType.LEFT_PAREN.name]):
             expr = self.expression()
-            self.peek_next(")", "Missing closing ')' in group expression.")
-            self.advance()
+            self.check_token(")", "Missing closing ')' in group expression.")
             return Group(expr)
 
     def match(self, token_types):
@@ -98,8 +97,8 @@ class Parser:
         """Move to next token."""
         self.current += 1
 
-    def peek_next(self, token, err_msg):
-        """Checks that the next token matches what's expected.
+    def check_token(self, token, err_msg):
+        """Checks that the current token matches what's expected.
         This is used for matching the closing parenthesis for Group expressions."""
         token_idx = self.current
 
@@ -109,6 +108,8 @@ class Parser:
         correct_token = self.tokens[token_idx].lexeme == token
         if not correct_token:
             raise ValueError(err_msg)
+
+        self.advance()
 
     def check_syntax(self):
         pass

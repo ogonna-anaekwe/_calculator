@@ -44,7 +44,9 @@ class Evaluator(Visitor):
 
     def visit_group_expr(self, Group):
         """Visitor implementation for group/parenthesized expressions."""
-        return self.evaluate(Group.expression)
+        return self.evaluate(
+            Group.expression
+        )  # Must evaluate the expression to avoid stack overflow! Stack overflow occurs if you evaluate the Group. Drop .expression and see!
 
     @staticmethod
     def check_operands(left, right):

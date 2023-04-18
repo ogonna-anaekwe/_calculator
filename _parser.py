@@ -58,7 +58,7 @@ class Parser:
         return expr
 
     def primary(self):
-        """Highest precedence represented by a literal which in this case is TokenType.NUMBER.
+        """Highest precedence represented by a literal (which in this case is TokenType.NUMBER) or a parenthesized expression.
         BNF: primary := NUMBER | "(" expression ")" """
         if self.match([TokenType.NUMBER.name]):
             return Literal(self.previous().lexeme)

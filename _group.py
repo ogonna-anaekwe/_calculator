@@ -12,7 +12,7 @@ class Group:
 
     def __str__(self):
         """Overrides default str representation."""
-        group_ast = "".join([str(self.expression)])
+        group_ast = "".join(["(group ", str(self.expression), ")"])
 
         if Group.lisp_style:
             return group_ast

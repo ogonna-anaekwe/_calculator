@@ -2,7 +2,6 @@ from _token import Token
 from _token_type import TokenType
 
 
-# BUG: for expressions ending w/ an int btw 0 - 9, the scanner drops the int, resulting in an invalid sequence of tokens. add_last_digit() fixes this in a TERRIBLE way!
 class Scanner:
     """Given a sequence of lexemes, creates a list of tokens."""
 
@@ -39,8 +38,6 @@ class Scanner:
 
             self.advance()
 
-        # self.validate_tokens()
-        self.add_last_digit()
         return self.tokens
 
     def add_token(self, token_type, lexeme):
@@ -75,11 +72,6 @@ class Scanner:
 
         return "".join(self.digits)
 
-    def add_last_digit(self):
-        """For strings ending with an int between 0-9, add that to the end of the tokens."""
-        if self.tokens[len(self.tokens) - 1].type != TokenType.NUMBER.name:
-            self.add_token(TokenType.NUMBER.name, self.string[len(self.string) - 1])
-
     def next(self):
         """Returns next character. Returns '-1' if we've reach the End of String."""
         if self.at_end():
@@ -90,25 +82,6 @@ class Scanner:
     def at_end(self):
         """Checks if we've reached the end of the input string/expression."""
         return self.current >= len(self.string) - 1
-
-    def validate_tokens(self):
-        """Checks that the tokens extracted form a valid arithmetic operation."""
-        num_first = self.is_digit(self.tokens[0].lexeme)
-        num_last = self.is_digit(self.tokens[-1].lexeme)
-        if not num_first or not num_last:
-            raise ValueError("Expressions must start and end with a number.")
-
-        token_len = len(self.tokens)
-        for idx in range(token_len):
-            if idx % 2 == 0:  # Even indexed tokens must be numbers (i.e. operands).
-                is_digit = self.is_digit_or_dot(self.tokens[idx].lexeme)
-                if not is_digit:
-                    raise ValueError("Number expected for token number " + str(idx))
-
-            else:  # Odd-indexed tokens must be operators.
-                is_operator = Scanner.operators.get(self.tokens[idx].lexeme)
-                if not is_operator:
-                    raise ValueError("Operator expected for token number " + str(idx))
 
     def print_tokens(self):
         for token in self.tokens:

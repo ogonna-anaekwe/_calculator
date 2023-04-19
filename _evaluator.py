@@ -30,6 +30,9 @@ class Evaluator(Visitor):
             return round(left - right, Evaluator.precision)
 
         if Binary.operator == "/":
+            if right == 0:
+                raise ZeroDivisionError("Can't divide by 0.")
+
             return round(left / right, Evaluator.precision)
 
         if Binary.operator == "*":

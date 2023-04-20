@@ -9,9 +9,9 @@ if __name__ == "__main__":
         "expr",
         help='expression that you want to evaluate. e.g: "10 * 50 ^ 2 - 40". it must be wrapped in double quotes.',
     )
-    string = " ".join(
+    string = "".join(
         [parser.parse_args().expr, " "]
-    )  # Because of a bug in the Scanner: For expressions ending w/ an int btw 0 - 9, the Scanner drops the int, resulting in an invalid sequence of tokens.
+    )  # " " because of a bug in the Scanner: For expressions ending w/ an int btw 0 - 9, the Scanner drops the int, resulting in an invalid sequence of tokens.
     scanner = Scanner(string)
     tokens = scanner.scan()
     expression_ast = Parser(tokens).parse()

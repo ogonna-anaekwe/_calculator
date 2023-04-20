@@ -43,7 +43,7 @@ class Evaluator(Visitor):
 
     def visit_literal_expr(self, Literal):
         """Visitor implementation for literal expressions."""
-        return Literal.literal
+        return Literal.value
 
     def visit_group_expr(self, Group):
         """Visitor implementation for group/parenthesized expressions."""

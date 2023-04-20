@@ -4,8 +4,8 @@ class Literal:
 
     lisp_style = True
 
-    def __init__(self, literal):
-        self.literal = literal
+    def __init__(self, value):
+        self.value = value
 
     def accept(self, Visitor):
         """Interface to the visitor implementation for Literal Expressions."""
@@ -13,7 +13,7 @@ class Literal:
 
     def __str__(self):
         """Overrides default str representation."""
-        literal_ast = "".join([str(self.literal)])
+        literal_ast = "".join([str(self.value)])
 
         if Literal.lisp_style:
             return literal_ast
@@ -21,7 +21,7 @@ class Literal:
         literal_ast = "".join(
             [
                 "Literal[",
-                str(self.literal),
+                str(self.value),
                 "]",
             ]
         )

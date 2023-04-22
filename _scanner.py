@@ -34,7 +34,7 @@ class Scanner:
             if is_digit_or_dot:
                 self.digits = []
                 number = self.get_digit()
-                self.add_token(TokenType.NUMBER.name, number)
+                self.add_token(TokenType.NUMBER.name, float(number))
 
             self.advance()
 

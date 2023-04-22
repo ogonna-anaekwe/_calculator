@@ -20,9 +20,6 @@ class Evaluator(Visitor):
 
         Evaluator.check_operands(left, right)
 
-        left = float(left)
-        right = float(right)
-
         if Binary.operator == "+":
             return round(left + right, Evaluator.precision)
 
@@ -54,5 +51,5 @@ class Evaluator(Visitor):
     @staticmethod
     def check_operands(left, right):
         """Validate that both the left and right operands are numbers."""
-        if not (isinstance(float(left), float) and isinstance(float(right), float)):
+        if not (isinstance(left, float) and isinstance(right, float)):
             raise TypeError("Left and right operands must be numbers.")

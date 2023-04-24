@@ -82,9 +82,6 @@ class Parser:
                 self.advance()
                 return True
 
-        # No need to call advance() here since tokens that don't match eventually
-        # hit primary() which calls advance(). Calling advance() here
-        # will lead to an IndexError.
         return False
 
     def previous(self):

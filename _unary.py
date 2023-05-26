@@ -21,6 +21,8 @@ class Unary:
         unary_ast = "".join(
             [
                 "Unary[",
+                self.operator,
+                " ",
                 str(self.right),
                 "]",
             ]

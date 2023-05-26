@@ -48,6 +48,13 @@ class Evaluator(Visitor):
             Group.expression
         )  # Must evaluate the expression to avoid stack overflow! Stack overflow occurs if you evaluate the Group. Drop .expression and see!
 
+    def visit_unary_expr(self, Unary):
+        """Visitor implementation for unary expressions."""
+        right = self.evaluate(Unary.right)
+
+        if Unary.operator == "-":
+            return -right
+
     @staticmethod
     def check_operands(left, right):
         """Validate that both the left and right operands are numbers."""

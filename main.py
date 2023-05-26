@@ -17,6 +17,6 @@ if __name__ == "__main__":
     )  # " " because of a bug in the Scanner: For expressions ending w/ an int btw 0 - 9, the Scanner drops the int, resulting in an invalid sequence of tokens.
     scanner = Scanner(string)
     tokens = scanner.scan()
-    expression_ast = Parser(tokens).parse()
-    value = Evaluator().evaluate(expression_ast)
+    ast = Parser(tokens).parse()
+    value = Evaluator().evaluate(ast)
     print(value)

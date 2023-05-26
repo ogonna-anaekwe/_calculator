@@ -14,3 +14,7 @@ class Visitor(ABC):
     @abstractmethod
     def visit_group_expr(self, Group):
         raise NotImplementedError
+
+    @abstractmethod
+    def visit_unary_expr(self, Unary):
+        raise NotImplementedError

@@ -1,6 +1,7 @@
 from _binary import Binary
 from _group import Group
 from _literal import Literal
+from _unary import Unary
 from _token_type import TokenType
 
 
@@ -41,21 +42,24 @@ class Parser:
         return expr
 
     def power(self):
-        """BNF: power := primary("^"primary)*"""
-        expr = self.primary()
+        """BNF: power := unary("^"power)*"""
+        expr = self.unary()
 
         while self.match([TokenType.POWER.name]):
             operator = self.previous().lexeme
-            right = self.primary()
-
-            if isinstance(expr, Binary):
-                """Right associativity for power expressions: 2 ^ 2 ^ 3 => 2 ^ (2 ^ 3)"""
-                new_right = Binary(expr.right, expr.operator, right)
-                expr = Binary(expr.left, operator, new_right)
-            else:
-                expr = Binary(expr, operator, right)
+            right = self.unary()  # exponentiation is right-associative.
+            expr = Binary(expr, operator, right)
 
         return expr
+
+    def unary(self):
+        """BNF: unary := ("-"unary)* | primary"""
+        while self.match([TokenType.MINUS.name]):
+            operator = self.previous().lexeme
+            right = self.unary()
+            return Unary(operator, right)
+
+        return self.primary()
 
     def primary(self):
         """Highest precedence represented by a literal (which in this case is TokenType.NUMBER) or a parenthesized expression.

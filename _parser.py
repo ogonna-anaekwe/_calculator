@@ -31,35 +31,35 @@ class Parser:
         return expr
 
     def factor(self):
-        """BNF: factor := power(("/" | "*")power)*"""
-        expr = self.power()
+        """BNF: factor := unary(("/" | "*")unary)*"""
+        expr = self.unary()
 
         while self.match([TokenType.SLASH.name, TokenType.STAR.name]):
             operator = self.previous().lexeme
-            right = self.power()
-            expr = Binary(expr, operator, right)
-
-        return expr
-
-    def power(self):
-        """BNF: power := unary("^"power)*"""
-        expr = self.unary()
-
-        while self.match([TokenType.POWER.name]):
-            operator = self.previous().lexeme
-            right = self.unary()  # exponentiation is right-associative.
+            right = self.unary()
             expr = Binary(expr, operator, right)
 
         return expr
 
     def unary(self):
-        """BNF: unary := ("-"unary)* | primary"""
+        """BNF: unary := ("-"unary)* | power"""
         while self.match([TokenType.MINUS.name]):
             operator = self.previous().lexeme
-            right = self.unary()
+            right = self.unary()  # unary is right-associative.
             return Unary(operator, right)
 
-        return self.primary()
+        return self.power()
+
+    def power(self):
+        """BNF: power := primary("^"power)*"""
+        expr = self.primary()
+
+        while self.match([TokenType.POWER.name]):
+            operator = self.previous().lexeme
+            right = self.power()  # exponentiation is right-associative.
+            expr = Binary(expr, operator, right)
+
+        return expr
 
     def primary(self):
         """Highest precedence represented by a literal (which in this case is TokenType.NUMBER) or a parenthesized expression.
